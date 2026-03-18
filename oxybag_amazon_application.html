@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OXYBAG｜Amazon 出品申請フォーム</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0D1E35;
+    --blue:    #1E5799;
+    --sky:     #3A87C8;
+    --gold:    #B8963E;
+    --gold-lt: #D4AA5A;
+    --cream:   #F8F5EF;
+    --paper:   #FDFBF8;
+    --gray:    #5A5A5A;
+    --midgray: #9A9A9A;
+    --ltgray:  #E8E4DC;
+    --red:     #C0392B;
+    --white:   #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--cream);
+    color: var(--navy);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 0%, rgba(30,87,153,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 90% 100%, rgba(184,150,62,0.07) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    position: relative;
+    z-index: 10;
+    background: var(--navy);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    border-bottom: 2px solid var(--gold);
+  }
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.12em;
+  }
+  .header-logo span { color: var(--gold); }
+  .header-badge {
+    font-size: 11px;
+    color: var(--midgray);
+    letter-spacing: 0.08em;
+    font-weight: 300;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, var(--navy) 0%, #163052 100%);
+    padding: 56px 40px 48px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: 'OXYBAG';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 140px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.05em;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+  }
+  .hero-title strong { font-weight: 600; color: var(--gold-lt); }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Main container ── */
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Notice box ── */
+  .notice {
+    background: var(--paper);
+    border: 1px solid var(--ltgray);
+    border-left: 4px solid var(--gold);
+    border-radius: 2px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .notice-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .notice-text { font-size: 13px; color: var(--gray); line-height: 1.8; }
+  .notice-text strong { color: var(--navy); font-weight: 400; }
+
+  /* ── Section ── */
+  .form-section {
+    margin-bottom: 40px;
+    animation: fadeUp 0.5s ease both;
+  }
+  .form-section:nth-child(1) { animation-delay: 0.05s; }
+  .form-section:nth-child(2) { animation-delay: 0.10s; }
+  .form-section:nth-child(3) { animation-delay: 0.15s; }
+  .form-section:nth-child(4) { animation-delay: 0.20s; }
+  .form-section:nth-child(5) { animation-delay: 0.25s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ltgray);
+  }
+  .section-num {
+    width: 28px;
+    height: 28px;
+    background: var(--navy);
+    color: var(--gold);
+    border-radius: 50%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--navy);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── Form fields ── */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .field-grid .span2 { grid-column: span 2; }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .field label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--navy);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .field label .req {
+    color: var(--red);
+    margin-left: 4px;
+    font-size: 13px;
+  }
+  .field label .opt {
+    color: var(--midgray);
+    font-size: 11px;
+    font-weight: 400;
+    margin-left: 4px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    color: var(--navy);
+    background: var(--white);
+    border: 1px solid var(--ltgray);
+    border-radius: 2px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--sky);
+    box-shadow: 0 0 0 3px rgba(58,135,200,0.12);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder { color: var(--midgray); font-weight: 300; }
+  .field textarea { resize: vertical; min-height: 90px; line-height: 1.7; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9A9A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer; }
+  .field-hint { font-size: 11px; color: var(--midgray); line-height: 1.6; margin-top: 2px; }
+
+  /* ── Checkbox group ── */
+  .check-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px 14px;
+    border: 1px solid var(--ltgray);
+    border-radius: 2px;
+    background: var(--white);
+    transition: border-color 0.2s, background 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    position: relative;
+  }
+  .check-item:hover { border-color: var(--sky); background: #F0F7FD; }
+  .check-item input[type="checkbox"] {
+    width: 16px; height: 16px; min-width: 16px; margin-top: 2px;
+    accent-color: var(--blue); cursor: pointer; flex-shrink: 0;
+    pointer-events: auto; position: relative; z-index: 2;
+  }
+  .check-item-text { pointer-events: none; }
+  .check-item-text { font-size: 13px; color: var(--gray); line-height: 1.6; }
+  .check-item-text strong { display: block; font-size: 13px; color: var(--navy); font-weight: 400; margin-bottom: 1px; }
+
+  /* ── Agreement ── */
+  .agreement-box {
+    background: var(--paper);
+    border: 1px solid var(--ltgray);
+    border-radius: 2px;
+    padding: 24px;
+    margin-bottom: 8px;
+  }
+  .agreement-box p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.9;
+    margin-bottom: 16px;
+  }
+  .agreement-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+  .agreement-check input { width: 17px; height: 17px; margin-top: 2px; accent-color: var(--blue); flex-shrink: 0; }
+  .agreement-check span { font-size: 13px; font-weight: 400; color: var(--navy); line-height: 1.6; }
+  .agreement-check span a { color: var(--blue); text-decoration: none; border-bottom: 1px solid rgba(30,87,153,0.3); }
+
+  /* ── Submit ── */
+  .submit-area { text-align: center; margin-top: 40px; }
+  .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    padding: 16px 52px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-transform: uppercase;
+  }
+  .btn-submit::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(13,30,53,0.22);
+  }
+  .btn-submit:active { transform: translateY(0); }
+  .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-submit svg { width: 16px; height: 16px; }
+  .submit-note { font-size: 12px; color: var(--midgray); margin-top: 12px; }
+
+  /* ── Success / Error state ── */
+  .result-box {
+    display: none;
+    padding: 24px 28px;
+    border-radius: 2px;
+    margin-top: 28px;
+    font-size: 14px;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+  .result-box.success {
+    background: #EAF6EC;
+    border: 1px solid #7AC68A;
+    color: #1A5C28;
+  }
+  .result-box.error {
+    background: #FEECEC;
+    border: 1px solid #E08080;
+    color: var(--red);
+  }
+
+  /* ── Footer ── */
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px 24px;
+    border-top: 1px solid var(--ltgray);
+    font-size: 12px;
+    color: var(--midgray);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── Progress bar ── */
+  .progress-bar {
+    height: 3px;
+    background: var(--ltgray);
+    border-radius: 2px;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--gold));
+    width: 0%;
+    transition: width 0.4s ease;
+    border-radius: 2px;
+  }
+
+  /* ── Validation ── */
+  .field input.invalid,
+  .field select.invalid,
+  .field textarea.invalid {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(192,57,43,0.1);
+  }
+  .field-error {
+    font-size: 11px;
+    color: var(--red);
+    margin-top: 3px;
+    display: none;
+  }
+  .field-error.visible { display: block; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 0 20px; }
+    .hero { padding: 40px 20px 36px; }
+    .container { padding: 36px 16px 60px; }
+    .field-grid { grid-template-columns: 1fr; }
+    .field-grid .span2 { grid-column: span 1; }
+    .hero::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="header-logo">OXY<span>BAG</span></div>
+  <div class="header-badge">AUTHORIZED RETAILER PORTAL</div>
+</header>
+
+<!-- Hero -->
+<div class="hero">
+  <p class="hero-eyebrow">Amazon Authorized Seller Application</p>
+  <h1 class="hero-title">Amazon <span>出品申請フォーム</span></h1>
+  <p class="hero-sub">OXYBAG 正規販売店 ／ onlee inc. 審査受付</p>
+</div>
+
+<!-- Main -->
+<main class="container">
+
+  <!-- 注意書き -->
+  <div class="notice">
+    <span class="notice-icon">📋</span>
+    <div class="notice-text">
+      <span>申請前にご確認ください。</span><br>
+      本フォームは OXYBAG の Amazon 出品を希望する正規販売店様専用の申請窓口です。
+      審査期間は受付後 <span>5〜10 営業日</span>です。承認後も MAPポリシー違反が確認された場合は出品許可を取り消す場合があります。
+      ご不明な点は <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="added8ddddc2dfd9edc2c3c1c8c8c2c3c883cec2c0">[email&#160;protected]</a></span> までお問い合わせください。
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <form id="applicationForm" novalidate>
+
+    <!-- Section 1: 会社情報 -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div class="section-title">会社・申請者情報</div>
+      </div>
+      <div class="field-grid">
+        <div class="field span2">
+          <label>会社名（正式名称）<span class="req">*</span></label>
+          <input type="text" name="company_name" placeholder="例：株式会社〇〇ゴルフ" required>
+          <span class="field-error">会社名を入力してください</span>
+        </div>
+        <div class="field">
+          <label>代表者氏名<span class="req">*</span></label>
+          <input type="text" name="rep_name" placeholder="例：山田 太郎" required>
+          <span class="field-error">代表者氏名を入力してください</span>
+        </div>
+        <div class="field">
+          <label>担当者氏名<span class="req">*</span></label>
+          <input type="text" name="contact_name" placeholder="例：田中 花子" required>
+          <span class="field-error">担当者氏名を入力してください</span>
+        </div>
+        <div class="field">
+          <label>担当者部署・役職<span class="opt">任意</span></label>
+          <input type="text" name="contact_dept" placeholder="例：EC事業部 マネージャー">
+        </div>
+        <div class="field">
+          <label>電話番号<span class="req">*</span></label>
+          <input type="tel" name="phone" placeholder="例：03-0000-0000" required>
+          <span class="field-error">電話番号を入力してください</span>
+        </div>
+        <div class="field span2">
+          <label>メールアドレス<span class="req">*</span></label>
+          <input type="email" name="email" placeholder="例：info@example.com" required>
+          <span class="field-error">有効なメールアドレスを入力してください</span>
+        </div>
+        <div class="field span2">
+          <label>会社住所<span class="req">*</span></label>
+          <input type="text" name="address" placeholder="例：〒000-0000 東京都〇〇区〇〇 1-1-1" required>
+          <span class="field-error">会社住所を入力してください</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Amazon アカウント情報 -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div class="section-title">Amazon 出品アカウント情報</div>
+      </div>
+      <div class="field-grid">
+        <div class="field span2">
+          <label>Amazon 出品者名（ストア名）<span class="req">*</span></label>
+          <input type="text" name="amazon_store_name" placeholder="例：〇〇ゴルフ公式ショップ" required>
+          <span class="field-error">ストア名を入力してください</span>
+        </div>
+        <div class="field span2">
+          <label>Amazon 出品者 ID（セラー ID）<span class="req">*</span></label>
+          <input type="text" name="amazon_seller_id" placeholder="例：A1XXXXXXXXXXXXX" required>
+          <span class="field-error">出品者IDを入力してください</span>
+          <span class="field-hint">セラーセントラル ＞ アカウント情報 ＞ 出品者トークン（出品者ID）からご確認ください</span>
+        </div>
+        <div class="field">
+          <label>Amazon ストア URL<span class="opt">任意</span></label>
+          <input type="url" name="amazon_store_url" placeholder="https://www.amazon.co.jp/s?me=...">
+        </div>
+        <div class="field">
+          <label>アカウント開設年月<span class="req">*</span></label>
+          <input type="month" name="amazon_account_since" required>
+          <span class="field-error">開設年月を選択してください</span>
+        </div>
+        <div class="field">
+          <label>直近12ヶ月の評価数（概算）<span class="req">*</span></label>
+          <select name="review_count" required>
+            <option value="">選択してください</option>
+            <option value="0-49">49件以下</option>
+            <option value="50-199">50〜199件</option>
+            <option value="200-499">200〜499件</option>
+            <option value="500-999">500〜999件</option>
+            <option value="1000+">1,000件以上</option>
+          </select>
+          <span class="field-error">評価数を選択してください</span>
+        </div>
+        <div class="field">
+          <label>直近12ヶ月の評価スコア（概算）<span class="req">*</span></label>
+          <select name="review_score" required>
+            <option value="">選択してください</option>
+            <option value="4.8+">4.8 以上</option>
+            <option value="4.5-4.7">4.5〜4.7</option>
+            <option value="4.0-4.4">4.0〜4.4</option>
+            <option value="3.5-3.9">3.5〜3.9</option>
+            <option value="under3.5">3.5 未満</option>
+          </select>
+          <span class="field-error">評価スコアを選択してください</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: 販売計画 -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div class="section-title">販売計画・方針</div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label>出品希望時期<span class="req">*</span></label>
+          <select name="start_timing" required>
+            <option value="">選択してください</option>
+            <option value="asap">承認次第すぐに</option>
+            <option value="1month">約1ヶ月後</option>
+            <option value="2-3month">2〜3ヶ月後</option>
+            <option value="undecided">未定</option>
+          </select>
+          <span class="field-error">出品希望時期を選択してください</span>
+        </div>
+        <div class="field">
+          <label>月間販売目標数（概算）<span class="req">*</span></label>
+          <select name="monthly_target" required>
+            <option value="">選択してください</option>
+            <option value="1-5">1〜5個</option>
+            <option value="6-20">6〜20個</option>
+            <option value="21-50">21〜50個</option>
+            <option value="51-100">51〜100個</option>
+            <option value="100+">100個以上</option>
+          </select>
+          <span class="field-error">月間目標数を選択してください</span>
+        </div>
+        <div class="field span2">
+          <label>出品を希望する商品<span class="req">*</span></label>
+          <div class="check-group">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="products" value="special_set">
+              <div class="check-item-text"><span>OXYBAG Special SET</span>　上代 29,500円（本体 + AUTO pump一式）</div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="products" value="single">
+              <div class="check-item-text"><span>OXYBAG 単品</span>　上代 27,800円（本体のみ）</div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="products" value="auto_pump">
+              <div class="check-item-text"><span>AUTO pump</span>　電動ポンプ</div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="products" value="steel_pump">
+              <div class="check-item-text"><span>STEEL pump</span>　ハンドポンプ</div>
+            </label>
+          </div>
+          <span class="field-error" id="productsError">出品希望商品を1つ以上選択してください</span>
+        </div>
+        <div class="field span2">
+          <label>販売価格の設定方針<span class="req">*</span></label>
+          <select name="price_policy" required>
+            <option value="">選択してください</option>
+            <option value="map_full">定価（上代）での販売</option>
+            <option value="map_discount">MAPポリシー範囲内の値引き（最大10%以内）</option>
+            <option value="consult">弊社と相談のうえ決定</option>
+          </select>
+          <span class="field-error">価格方針を選択してください</span>
+          <span class="field-hint">MAPポリシー：恒常的な10%以上の値引きは禁止です。定価販売を推奨しています。</span>
+        </div>
+        <div class="field span2">
+          <label>既存の取り扱いゴルフ用品・ブランド<span class="opt">任意</span></label>
+          <textarea name="existing_brands" placeholder="例：タイトリスト、キャロウェイ等のクラブ・ゴルフ用品を取り扱っています。"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4: 自社EC・他チャネル -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div class="section-title">その他販売チャネル</div>
+      </div>
+      <div class="field-grid">
+        <div class="field span2">
+          <label>現在運営中のチャネル<span class="opt">任意・複数選択可</span></label>
+          <div class="check-group">
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="channels" value="rakuten">
+              <div class="check-item-text"><span>楽天市場</span></div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="channels" value="yahoo">
+              <div class="check-item-text"><span>Yahoo!ショッピング</span></div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="channels" value="own_ec">
+              <div class="check-item-text"><span>自社 EC サイト</span></div>
+            </label>
+            <label class="check-item" onclick="toggleCheck(this)">
+              <input type="checkbox" name="channels" value="physical">
+              <div class="check-item-text"><span>実店舗</span></div>
+            </label>
+          </div>
+        </div>
+        <div class="field span2">
+          <label>その他・補足事項<span class="opt">任意</span></label>
+          <textarea name="remarks" placeholder="ご質問・特記事項等があればご記入ください。"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: MAP同意 -->
+    <div class="form-section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div class="section-title">MAPポリシー・ガイドライン同意</div>
+      </div>
+      <div class="agreement-box">
+        <p>
+          OXYBAG の Amazon 出品承認にあたり、以下の事項に同意いただく必要があります。
+          承認後も違反が確認された場合は、是正依頼・出荷停止・取引条件見直し・取引停止の措置を取る場合があります。
+        </p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <label class="agreement-check">
+            <input type="checkbox" name="agree_map" id="agreeMap" required>
+            <span>MAPポリシーを遵守します。<br><small style="font-weight:400;color:#666;">恒常的な10%以上の値引き・クーポン・過剰ポイント付与等による実質値引きを行いません。</small></span>
+          </label>
+          <label class="agreement-check">
+            <input type="checkbox" name="agree_guidelines" id="agreeGuide" required>
+            <span>OXYBAG 販売店ガイドライン（2026年版）の全内容を確認し、遵守します。</span>
+          </label>
+          <label class="agreement-check">
+            <input type="checkbox" name="agree_resale" id="agreeResale" required>
+            <span>二次流通・海外販売・相乗り出品は行いません。</span>
+          </label>
+        </div>
+        <span class="field-error" id="agreeError" style="margin-top:10px;display:none;">すべての項目にチェックを入れてください</span>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-area">
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        申請を送信する
+      </button>
+      <p class="submit-note">送信後、弊社より確認メールをお送りします。審査期間：5〜10営業日</p>
+    </div>
+
+    <!-- Result -->
+    <div class="result-box success" id="resultSuccess">
+      ✅ <span>申請を受け付けました。</span><br>
+      <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb888e8b8b94898fbb9495979e9e94959ed5989496">[email&#160;protected]</a> へ申請内容を送信しました。<br>
+      担当者より 5〜10 営業日以内にご連絡いたします。
+    </div>
+    <div class="result-box error" id="resultError">
+      ⚠️ <span>送信に失敗しました。</span><br>
+      お手数ですが、<span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3a0a6a3a3bca1a793bcbdbfb6b6bcbdb6fdb0bcbe">[email&#160;protected]</a></span> まで直接ご連絡ください。
+    </div>
+
+  </form>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  © onlee inc. ／ OXYBAG Authorized Retailer Application 2026 ／ 本フォームは正規販売店専用です
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ── Toggle checkbox ──
+  function toggleCheck(label) {
+    const cb = label.querySelector('input[type="checkbox"]');
+    cb.checked = !cb.checked;
+    if (cb.checked) {
+      label.style.borderColor = 'var(--sky)';
+      label.style.background = '#E8F4FD';
+    } else {
+      label.style.borderColor = 'var(--ltgray)';
+      label.style.background = 'var(--white)';
+    }
+  }
+
+  // ── Progress bar based on filled required fields ──
+  const requiredFields = document.querySelectorAll('[required]');
+  const progressFill   = document.getElementById('progressFill');
+
+  function updateProgress() {
+    let filled = 0;
+    requiredFields.forEach(f => {
+      if (f.type === 'checkbox') { if (f.checked) filled++; }
+      else if (f.value.trim()) filled++;
+    });
+    progressFill.style.width = Math.round((filled / requiredFields.length) * 100) + '%';
+  }
+  document.addEventListener('input', updateProgress);
+  document.addEventListener('change', updateProgress);
+
+  // ── Inline validation ──
+  function showError(field, msg) {
+    field.classList.add('invalid');
+    const err = field.parentElement.querySelector('.field-error');
+    if (err) { err.textContent = msg || err.textContent; err.classList.add('visible'); }
+  }
+  function clearError(field) {
+    field.classList.remove('invalid');
+    const err = field.parentElement.querySelector('.field-error');
+    if (err) err.classList.remove('visible');
+  }
+  requiredFields.forEach(f => {
+    f.addEventListener('blur', () => {
+      if (f.type === 'checkbox') return;
+      if (!f.value.trim()) showError(f);
+      else clearError(f);
+    });
+    f.addEventListener('input', () => { if (f.value.trim()) clearError(f); });
+  });
+
+  // ── Form submit ──
+  const form = document.getElementById('applicationForm');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    let valid = true;
+
+    // validate required text/select/email fields
+    requiredFields.forEach(f => {
+      if (f.type === 'checkbox') return;
+      if (!f.value.trim()) { showError(f); valid = false; }
+    });
+
+    // validate checkboxes (products)
+    const products = form.querySelectorAll('input[name="products"]:checked');
+    if (products.length === 0) {
+      document.getElementById('productsError').classList.add('visible');
+      valid = false;
+    } else {
+      document.getElementById('productsError').classList.remove('visible');
+    }
+
+    // validate agreement checkboxes
+    const agreeMap   = document.getElementById('agreeMap').checked;
+    const agreeGuide = document.getElementById('agreeGuide').checked;
+    const agreeResale= document.getElementById('agreeResale').checked;
+    const agreeErr   = document.getElementById('agreeError');
+    if (!agreeMap || !agreeGuide || !agreeResale) {
+      agreeErr.style.display = 'block';
+      valid = false;
+    } else {
+      agreeErr.style.display = 'none';
+    }
+
+    if (!valid) {
+      const firstInvalid = form.querySelector('.invalid, [style*="display: block"]');
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    // ── Build form data ──
+    submitBtn.disabled = true;
+    submitBtn.textContent = '送信中...';
+
+    const data = new FormData(form);
+    const selectedProducts = [...form.querySelectorAll('input[name="products"]:checked')].map(c => c.value).join(', ');
+    const selectedChannels = [...form.querySelectorAll('input[name="channels"]:checked')].map(c => c.value).join(', ');
+
+    const body = [
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      'OXYBAG Amazon 出品申請フォーム（2026）',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '',
+      '【会社・申請者情報】',
+      `会社名：${data.get('company_name')}`,
+      `代表者氏名：${data.get('rep_name')}`,
+      `担当者氏名：${data.get('contact_name')}`,
+      `担当者部署・役職：${data.get('contact_dept') || '（未記入）'}`,
+      `電話番号：${data.get('phone')}`,
+      `メールアドレス：${data.get('email')}`,
+      `会社住所：${data.get('address')}`,
+      '',
+      '【Amazon アカウント情報】',
+      `ストア名：${data.get('amazon_store_name')}`,
+      `出品者 ID：${data.get('amazon_seller_id')}`,
+      `ストア URL：${data.get('amazon_store_url') || '（未記入）'}`,
+      `アカウント開設：${data.get('amazon_account_since')}`,
+      `直近評価数：${data.get('review_count')}`,
+      `直近評価スコア：${data.get('review_score')}`,
+      '',
+      '【販売計画】',
+      `出品希望時期：${data.get('start_timing')}`,
+      `月間販売目標：${data.get('monthly_target')}`,
+      `希望商品：${selectedProducts || '（未選択）'}`,
+      `価格設定方針：${data.get('price_policy')}`,
+      `既存取扱ブランド：${data.get('existing_brands') || '（未記入）'}`,
+      '',
+      '【その他チャネル】',
+      `運営中チャネル：${selectedChannels || '（なし）'}`,
+      `補足事項：${data.get('remarks') || '（なし）'}`,
+      '',
+      '【同意確認】',
+      `MAPポリシー同意：${agreeMap ? '✓ 同意' : '未同意'}`,
+      `販売店ガイドライン同意：${agreeGuide ? '✓ 同意' : '未同意'}`,
+      `二次流通・相乗り不実施：${agreeResale ? '✓ 確認' : '未確認'}`,
+      '',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      `送信日時：${new Date().toLocaleString('ja-JP')}`,
+    ].join('\n');
+
+    // Use mailto as fallback (since no backend)
+    const subject = encodeURIComponent(`【OXYBAG Amazon出品申請】${data.get('company_name')}`);
+    const mailBody = encodeURIComponent(body);
+    const mailto = `mailto:support@onleeone.com?subject=${subject}&body=${mailBody}`;
+
+    try {
+      window.location.href = mailto;
+      setTimeout(() => {
+        document.getElementById('resultSuccess').style.display = 'block';
+        document.getElementById('resultSuccess').scrollIntoView({ behavior: 'smooth' });
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<svg
